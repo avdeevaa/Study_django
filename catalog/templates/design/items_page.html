@@ -1,10 +1,9 @@
 {% load static %}
-
 <!DOCTYPE HTML>
 <html>
 
 <head>
-  <title>simplestyle_6 - contact us</title>
+  <title>simplestyle_6 - examples</title>
   <meta charset="UTF-8">
   <meta name="description" content="website description" />
   <meta name="keywords" content="website keywords, website keywords" />
@@ -18,7 +17,7 @@
       <div id="logo">
         <div id="logo_text">
           <!-- class="logo_colour", allows you to change the colour of the text -->
-          <h1><a href="{% url 'main_page' %}"">simple<span class="logo_colour">style_6</span></a></h1>
+          <h1><a href="main_page.html">simple<span class="logo_colour">style_6</span></a></h1>
           <h2>Simple. Contemporary. Website Template.</h2>
         </div>
       </div>
@@ -26,31 +25,23 @@
         <ul id="menu">
           <!-- put class="selected" in the li tag for the selected page - to highlight which page you're on -->
           <li><a href="{% url 'main_page' %}">Домашняя страничка</a></li>
-          <li><a href="{% url 'items_page' %}">Товары</a></li>
-          <li class="selected"><a href="{% url 'contact_page' %}">Контакты</a></li>
+          <li class="selected"><a href="{% url 'items_page' %}">Товары</a></li>
+          <li><a href="{% url 'contact_page' %}">Контакты</a></li>
         </ul>
       </div>
     </div>
     <div id="content_header"></div>
+
     <div id="site_content">
 
-      <div id="content">
-        <!-- insert the page content here -->
-        <h1>Свяжитесь с нами</h1>
-        <p>Напишите ваши данные:</p>
-        <form action="" method="post">
-          <div class="form_settings">
-            {% csrf_token %}
-            <p><span>Ваше имя:</span><input class="contact" type="text" name="name" value="" /></p>
-            <p><span>Ваш телефон:</span><input class="contact" type="text" name="зрщту" value="" /></p>
-            <p><span>Ваше сообщение:</span><textarea class="contact textarea" rows="8" cols="50" name="message"></textarea></p>
-            <p style="padding-top: 15px"><span>&nbsp;</span><input class="submit" type="submit" name="contact_submitted" value="подтвердить" /></p>
+
+          <div id="content">
+            <h1>Товары</h1>
+            <h2>Страничка с товаром</h2>
+            <p>Я не понимаю, почему подшаблон работает на главной странице, а здесь не изображается. Ошибки не вижу совсем...</p>
+            {% include 'tables.html' %}
+
           </div>
-        </form>
-          <p>
-          <br /><br />Мы с Вами свяжемся в ближайшее время
-          <img src="{% static 'style/heart.png' %}" alt="heart" />
-          </p>
       </div>
     </div>
     <div id="content_footer"></div>
