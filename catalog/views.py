@@ -2,16 +2,16 @@ from django.shortcuts import render
 
 # Create your views here.
 
-from catalog.models import Category
+from catalog.models import Product
 
 # def main_page(request):
 #     return render(request, 'design/main_page.html')
 
 
 def main_page(request):
-    categories_list = Category.objects.all()
+    products_list = Product.objects.all()
     context = {
-        'object_list': categories_list
+        'object_list': products_list
     }
     return render(request, 'design/main_page.html', context)
 
