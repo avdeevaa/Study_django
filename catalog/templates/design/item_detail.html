@@ -1,0 +1,47 @@
+{% extends 'design/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="news-tables">
+              <div class="news-table">
+                <div class="sidebar_item">
+                  <h3>{{ product.name }}</h3>
+                  <h4>Homework 20.2</h4>
+                  <h5>Создано: &copy; {% now 'Y' %}</h5>
+                  <p>{{ product.description }}</p>
+                </div>
+              </div>
+    </div>
+{% endblock %}
+
+
+<!--{% include 'base.html' %}-->
+
+
+<!--      <div id="content">-->
+<!--        <h1>Страничка для карточек </h1>-->
+<!--        <h2>Наши товары</h2>-->
+<!--        <p>Пытаемся сделать карточки для товаров... </p>-->
+
+<!--        <div class="news-tables">-->
+<!--              {% for category in object_list%}-->
+<!--              <div class="news-table">-->
+<!--                <div class="sidebar_item">-->
+<!--                  <h3>{{ category.name }}</h3>-->
+<!--                  <h4>Homework 20.2</h4>-->
+<!--                  <h5>Создано: &copy; {% now 'Y' %}</h5>-->
+<!--                  <p>{{ category.description }}</p>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--              {% endfor %}-->
+<!--      </div>-->
+<!--    </div>-->
+<!--    <div id="content_footer"></div>-->
+<!--    <div id="footer">-->
+<!--      <p><a href="{% url 'main_page' %}">Домашняя страничка</a> | <a href="{% url 'items_page' %}">Товары</a> | <a href="{% url 'contact_page' %}">Контакты</a></p>-->
+
+<!--    </div>-->
+<!--    <p>&nbsp;</p>-->
+<!--  </div>-->
+<!--</body>-->
+<!--</html>-->

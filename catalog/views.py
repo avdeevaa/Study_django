@@ -1,5 +1,4 @@
-from django.shortcuts import render
-
+from django.shortcuts import render, get_object_or_404
 # Create your views here.
 
 from catalog.models import Product
@@ -26,5 +25,18 @@ def contact_page(request):
 
 
 def items_page(request):
-    return render(request, 'design/items_page.html')
+    products_list = Product.objects.all()
+    context = {
+        'object_list': products_list
+    }
+    return render(request, 'design/items_page.html', context)
+
+
+def item_detail(request, pk):
+    product = get_object_or_404(Product, pk=pk)
+    context = {
+        'product': product
+    }
+    return render(request, 'design/item_detail.html', context)
+
 
