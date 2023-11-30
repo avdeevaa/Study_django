@@ -1,5 +1,5 @@
 {% load static %}
-{% load media_filters %}
+{% load mediapath %}
 
 <!DOCTYPE HTML>
 <html>
@@ -50,7 +50,7 @@
         </form>
           <p>
           <br /><br />Мы с Вами свяжемся в ближайшее время
-          <img src="{% static 'style/heart.png'|mediapath %}" alt="heart" />
+          <img src="{% mediapath 'heart.png' %}" alt="heart" />
 
 <!--          <img src="{% static 'style/heart.png' %}" alt="heart" />-->
           </p>
