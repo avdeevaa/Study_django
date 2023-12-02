@@ -1,0 +1,20 @@
+{% extends 'design/base.html' %}
+{% load static %}
+
+{% block content %}
+
+    <h3>{{ object.title }}</h3>
+    <h4>Homework 21.2</h4>
+    <h5>Создано: {{ object.creation_date }}</h5>
+    <p>{{ object.content }}</p>
+    <h5>Slug: {{ object.slug }}</h5>
+
+    <h5>---------Создано: &copy; {% now 'M Y' %}---------</h5>
+
+    <h4>Хотите удалить эту запись?</h4>
+    <form method="post" action="{% url 'catalog:delete_blog' object.pk %}">
+        {% csrf_token %}
+        <input class="submit" type="submit" name="contact_submitted" value="подтвердить" />
+    </form>
+
+{% endblock %}

@@ -1,0 +1,25 @@
+
+
+<h1>Все записи в нашем блоге</h1>
+
+<a href="{% url 'catalog:create_blog' %}">Создать новую запись?</a>
+
+{% for object in object_list%}
+
+    <h3>{{ object.title }}</h3>
+    <h4>Homework 21.2</h4>
+    <h5>Создано: {{ object.creation_date }}</h5>
+    <p>{{ object.content }}</p>
+    <h5>Slug: {{ object.slug }}</h5>
+
+    <h5>---------Создано: &copy; {% now 'M Y' %}---------</h5>
+
+<a href="{% url 'catalog:update_blog' object.pk %}">Изменить эту запись</a>
+<a href="{% url 'catalog:view' object.pk %}">Просмотреть эту запись?</a>
+<a href="{% url 'catalog:delete_blog' object.pk %}">Удалить эту запись?</a>
+
+
+{% endfor %}
+
+
+

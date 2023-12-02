@@ -24,9 +24,10 @@
       <div id="menubar">
         <ul id="menu">
           <!-- put class="selected" in the li tag for the selected page - to highlight which page you're on -->
-          <li class="selected"><a href="{% url 'main_page' %}">Домашняя страничка</a></li>
-          <li><a href="{% url 'items_page' %}">Товары</a></li>
-          <li><a href="{% url 'contact_page' %}">Контакты</a></li>
+          <li class="selected"><a href="{% url 'catalog:main_page' %}">Домашняя страничка</a></li>
+          <li><a href="{% url 'catalog:items_page' %}">Товары</a></li>
+          <li><a href="{% url 'catalog:read_blog' %}">Блог</a></li>
+          <li><a href="{% url 'catalog:contact_page' %}">Контакты</a></li>
         </ul>
       </div>
     </div>
@@ -53,7 +54,7 @@
     </div>
     <div id="content_footer"></div>
     <div id="footer">
-      <p><a href="{% url 'main_page' %}">Домашняя страничка</a> | <a href="{% url 'items_page' %}">Товары</a> | <a href="{% url 'contact_page' %}">Контакты</a></p>
+      <p><a href="{% url 'catalog:main_page' %}">Домашняя страничка</a> | <a href="{% url 'catalog:items_page' %}">Товары</a> | <a href="{% url 'catalog:read_blog' %}">Блог</a> | <a href="{% url 'catalog:contact_page' %}">Контакты</a></p>
 
     </div>
     <p>&nbsp;</p>
