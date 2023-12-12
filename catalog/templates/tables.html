@@ -1,15 +1,40 @@
+<div class="container">
+  <div class="row">
+    {% for category in object_list %}
+      <div class="col-md-5">
+        <div class="card">
+          <div class="card-body">
+            <h3 class="card-title">{{ category.name }}</h3>
+            <h4>Homework 20.2</h4>
+            <h5>Создано: &copy; {% now 'Y' %}</h5>
+            <p class="card-text">{{ category.description }}</p>
+            <a href="{% url 'catalog:update_item' category.pk %}" class="btn btn-primary">Изменить</a>
+            <a href="{% url 'catalog:item_detail' category.pk %}" class="btn btn-secondary">Просмотреть</a>
+            <a href="{% url 'catalog:delete_item' category.pk %}" class="btn btn-danger">Удалить</a>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</div>
 
-            <div class="news-tables">
-              {% for category in object_list%}
-              <div class="news-table">
-                <div class="sidebar_item">
-                  <h3>{{ category.name }}</h3>
-                  <h4>Homework 20.2</h4>
-                  <h5>Создано: &copy; {% now 'Y' %}</h5>
-                  <p>{{ category.description }}</p>
-                </div>
-              </div>
-              {% endfor %}
+
+
+
+<!--            <div class="news-tables">-->
+<!--              {% for category in object_list%}-->
+<!--              <div class="news-table">-->
+<!--                <div class="sidebar_item">-->
+<!--                  <h3>{{ category.name }}</h3>-->
+<!--                  <h4>Homework 20.2</h4>-->
+<!--                  <h5>Создано: &copy; {% now 'Y' %}</h5>-->
+<!--                  <p>{{ category.description }}</p>-->
+<!--                  <a href="{% url 'catalog:update_item' category.pk %}">Изменить</a>-->
+<!--                  <a href="{% url 'catalog:item_detail' category.pk %}">Просмотреть</a>-->
+<!--                  <a href="{% url 'catalog:delete_item' category.pk %}">Удалить</a>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--              {% endfor %}-->
 
 <!--              <div class="news-table">-->
 <!--                <div class="sidebar_item">-->

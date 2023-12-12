@@ -1,6 +1,7 @@
 from django.shortcuts import render, reverse
 from catalog.models import Product, Blog
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from catalog.forms import ProductForm
 
 
 class ProductListView(ListView):
@@ -9,12 +10,30 @@ class ProductListView(ListView):
     template_name = 'design/main_page.html'
 
 
-# def main_page(request):
-#     products_list = Product.objects.all()
-#     context = {
-#         'object_list': products_list
-#     }
-#     return render(request, 'design/main_page.html', context)
+class ProductCreateView(CreateView):
+    model = Product
+    form_class = ProductForm
+    template_name = 'design/product_form.html'
+
+    def get_success_url(self):
+        return reverse('catalog:items_page')
+
+
+class ProductUpdateView(UpdateView):
+    model = Product
+    form_class = ProductForm
+    template_name = 'design/product_form.html'
+
+    def get_success_url(self):
+        return reverse('catalog:items_page')
+
+
+class ProductDeleteView(DeleteView):
+    model = Product
+    template_name = 'design/product_confirm_delete.html'
+
+    def get_success_url(self):
+        return reverse('catalog:items_page')
 
 
 def contact_page(request):
@@ -38,14 +57,6 @@ class ProductDetailView(DetailView):
     """ replaces item_detail"""
     model = Product
     template_name = 'design/item_detail.html'
-
-#
-# def item_detail(request, pk):
-#     product = get_object_or_404(Product, pk=pk)
-#     context = {
-#         'product': product
-#     }
-#     return render(request, 'design/item_detail.html', context)
 
 
 class BlogCreateView(CreateView):

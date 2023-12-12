@@ -326,11 +326,11 @@ table tr td
 
 
 .news-tables {
-  display: flex;
-  justify-content: space-between; /* Это распределит блоки с равным пространством между ними */
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 16px; /* Расстояние между табличками */
 }
 
 .news-table {
-  width: 35%; /* Задайте ширину блока, чтобы оставить некоторое пространство между блоками */
-  margin-right: 10px;
+  width: 100%; /* Ширина каждой таблички */
 }

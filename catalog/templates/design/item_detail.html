@@ -6,8 +6,8 @@
 <h1>Карточки для товаров</h1>
 
 <h2>Наши товары</h2>
-<p>Дизайн получился немножко странный, ну ладно. Хотелось бы, чтобы было ровно посередине эти таблички...</p>
 
+<a href="{% url 'catalog:create_item' %}">Создать новую запись?</a>
 
 <div class="news-tables">
               <div class="news-table">
@@ -16,6 +16,9 @@
                   <h4>Homework 20.2</h4>
                   <h5>Создано: &copy; {% now 'Y' %}</h5>
                   <p>{{ product.description }}</p>
+                  <a href="{% url 'catalog:update_item' product.pk %}">Изменить</a>
+                  <a href="{% url 'catalog:item_detail' product.pk %}">Просмотреть</a>
+                  <a href="{% url 'catalog:delete_item' product.pk %}">Удалить</a>
                 </div>
               </div>
     </div>

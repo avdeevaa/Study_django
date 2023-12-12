@@ -1,0 +1,23 @@
+{% extends 'design/base.html' %}
+{% load static %}
+
+{% block content %}
+
+
+<div class="news-tables">
+              <div class="news-table">
+                <div class="sidebar_item">
+                  <h3>{{ product.name }}</h3>
+                  <h4>Homework 20.2</h4>
+                  <h5>Создано: &copy; {% now 'Y' %}</h5>
+                  <p>{{ product.description }}</p>
+                  <h4>Хотите удалить эту запись?</h4>
+                  <form method="post" action="{% url 'catalog:delete_item' product.pk %}">
+                  {% csrf_token %}
+                  <input class="submit" type="submit" name="contact_submitted" value="подтвердить" />
+                  </form>
+                </div>
+              </div>
+    </div>
+
+{% endblock %}
