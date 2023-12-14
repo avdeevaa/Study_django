@@ -8,6 +8,11 @@
             <h4>Homework 20.2</h4>
             <h5>Создано: &copy; {% now 'Y' %}</h5>
             <p class="card-text">{{ category.description }}</p>
+            {% for version in category.version_set.all %}
+              {% if version.is_active_version %}
+                <p class="card-text">Версия {{ version.name_of_version }}</p>
+              {% endif %}
+            {% endfor %}
             <a href="{% url 'catalog:update_item' category.pk %}" class="btn btn-primary">Изменить</a>
             <a href="{% url 'catalog:item_detail' category.pk %}" class="btn btn-secondary">Просмотреть</a>
             <a href="{% url 'catalog:delete_item' category.pk %}" class="btn btn-danger">Удалить</a>
