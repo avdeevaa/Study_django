@@ -28,6 +28,11 @@
           <li><a href="{% url 'catalog:items_page' %}">Товары</a></li>
           <li><a href="{% url 'catalog:read_blog' %}">Блог</a></li>
           <li><a href="{% url 'catalog:contact_page' %}">Контакты</a></li>
+          {% if user.is_authenticated %}
+            <li class="selected"><a href="{% url 'users:logout' %}">Выйти</a></li>
+          {% else %}
+            <li class="selected"><a href="{% url 'users:login' %}">Войти</a></li>
+          {% endif %}
         </ul>
       </div>
     </div>
