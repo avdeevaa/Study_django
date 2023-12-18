@@ -7,7 +7,8 @@ class ProductForm(forms.ModelForm):
 
     class Meta:
         model = Product
-        fields = '__all__'
+        # fields = '__all__'
+        exclude = ('owner',)  # это позволит выставить значение автоматически
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

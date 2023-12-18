@@ -16,6 +16,7 @@
                   <h4>Homework 20.2</h4>
                   <h5>Создано: &copy; {% now 'Y' %}</h5>
                   <p>{{ product.description }}</p>
+                  <p>{{ product.owner }}</p>
                   <a href="{% url 'catalog:update_item' product.pk %}">Изменить</a>
                   <a href="{% url 'catalog:item_detail' product.pk %}">Просмотреть</a>
                   <a href="{% url 'catalog:delete_item' product.pk %}">Удалить</a>

@@ -1,6 +1,8 @@
 from django.db import models
 from django.utils.text import slugify
 
+from config import settings
+
 
 class Product(models.Model):
     name = models.CharField(max_length=100, verbose_name='наименование')
@@ -10,6 +12,8 @@ class Product(models.Model):
     price = models.IntegerField(verbose_name='цена за штуку')
     creation_date = models.DateField(verbose_name='дата создания')
     modification_date = models.DateField(verbose_name='дата последнего изменения')
+
+    owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True, blank=True)
 
     def __str__(self):
         return f"{self.name}, {self.category}, {self.price}"
