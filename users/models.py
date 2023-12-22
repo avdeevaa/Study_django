@@ -10,6 +10,7 @@ class User(AbstractUser):
         ('czechoslovakia', 'Czechoslovakia'),
         ('poland', 'Poland'),
     ]
+    groups = models.ManyToManyField('auth.Group', blank=True, related_name='user_groups', verbose_name='Groups')
 
     username = None
     email = models.EmailField(unique=True, verbose_name="почта")

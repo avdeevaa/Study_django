@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils.text import slugify
+from django.core.exceptions import PermissionDenied
 
 from config import settings
 
@@ -15,8 +16,17 @@ class Product(models.Model):
 
     owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True, blank=True)
 
+    is_published = models.BooleanField(default=False, verbose_name='публикация продукта')
+
     def __str__(self):
         return f"{self.name}, {self.category}, {self.price}"
+
+    def save(self, *args, **kwargs):
+        user = kwargs.pop('user', None)
+        if user and user != self.owner:
+            raise PermissionDenied("You do not have permission to edit this product.")
+
+        super().save(*args, **kwargs)
 
     class Meta:
         verbose_name = "продукт"

@@ -2,6 +2,7 @@ from django.shortcuts import render, reverse
 from catalog.models import Product, Blog
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from catalog.forms import ProductForm
+from django.core.exceptions import PermissionDenied
 
 
 class ProductListView(ListView):
@@ -33,6 +34,15 @@ class ProductUpdateView(UpdateView):
 
     def get_success_url(self):
         return reverse('catalog:items_page')
+
+    def form_valid(self, form):
+        if form.instance.owner != self.request.user:
+            raise PermissionDenied("You do not have permission to edit this product.")
+        self.object = form.save()
+        self.object.owner = self.request.user
+        self.object.save()
+
+        return super().form_valid(form)
 
 
 class ProductDeleteView(DeleteView):
