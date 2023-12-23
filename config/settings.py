@@ -11,16 +11,23 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
+import os
+
+from dotenv import load_dotenv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+dot_env = os.path.join(BASE_DIR, '.env')
+load_dotenv(dotenv_path=dot_env)
 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-i4+3cd8b+i98ffx)f*&bo$*$72-4%r8j7$dfx=j!(_1_id5t7k'
+# SECRET_KEY = 'django-insecure-i4+3cd8b+i98ffx)f*&bo$*$72-4%r8j7$dfx=j!(_1_id5t7k'
+SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -83,9 +90,9 @@ WSGI_APPLICATION = 'config.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'django_db', # Название БД
+        'NAME': os.getenv('DB_NAME'), # Название БД
         'USER': 'postgres', # Пользователь для подключения
-        'PASSWORD': '1234', # Пароль для этого пользователя
+        'PASSWORD': os.getenv('DB_PASSWORD'), # Пароль для этого пользователя
     }
 }
 
@@ -119,7 +126,7 @@ USE_I18N = True
 
 USE_TZ = True
 
-import os
+
 
 
 # Static files (CSS, JavaScript, Images)
@@ -151,6 +158,25 @@ LOGOUT_REDIRECT_URL = '/'
 
 EMAIL_HOST = 'smtp.yandex.com'
 EMAIL_PORT = 587
-EMAIL_HOST_USER = 'project.skypro@yandex.ru'
-EMAIL_HOST_PASSWORD = 'zjkibdkpeflxlouk'
+EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
 EMAIL_USE_TLS = True
+
+CACHES = {
+    "default": {
+        "BACKEND": "django.core.cache.backends.redis.RedisCache",
+        "LOCATION": "redis://127.0.0.1:6379",
+    }
+}
+
+CACHE_ENABLED=True
+
+if CACHE_ENABLED:
+    CACHES = {
+        "default": {
+            "BACKEND": "django.core.cache.backends.redis.RedisCache",
+            "LOCATION": os.getenv('CACHE_LOCATION'),
+            "TIMEOUT": 300 # Ручная регулировка времени жизни кеша в секундах, по умолчанию 300
+        }
+    }
+

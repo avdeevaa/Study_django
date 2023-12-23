@@ -29,6 +29,7 @@
           <li><a href="{% url 'catalog:main_page' %}">Домашняя страничка</a></li>
           <li class="selected"><a href="{% url 'catalog:items_page' %}">Товары</a></li>
           <li><a href="{% url 'catalog:read_blog' %}">Блог</a></li>
+          <li><a href="{% url 'catalog:all_categories' %}">Категории</a></li>
           <li><a href="{% url 'catalog:contact_page' %}">Контакты</a></li>
           {% if user.is_authenticated %}
             <li class="selected"><a href="{% url 'users:logout' %}">Выйти</a></li>

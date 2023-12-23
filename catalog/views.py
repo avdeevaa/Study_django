@@ -1,8 +1,13 @@
 from django.shortcuts import render, reverse
-from catalog.models import Product, Blog
+from django.views.decorators.cache import cache_page
+
+from catalog.models import Product, Blog, Category
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from catalog.forms import ProductForm
 from django.core.exceptions import PermissionDenied
+
+from config.settings import CACHE_ENABLED
+from django.core.cache import cache
 
 
 class ProductListView(ListView):
@@ -70,10 +75,29 @@ def items_page(request):
     return render(request, 'design/items_page.html', context)
 
 
+# @cache_page(60)
 class ProductDetailView(DetailView):
     """ replaces item_detail"""
     model = Product
     template_name = 'design/item_detail.html'
+
+
+class CategoryListView(ListView):
+    """сюда нужно добавить низкоуровневое кеширование"""
+    model = Category
+    template_name = 'design/category_list.html'
+
+
+def cache_example():
+    if CACHE_ENABLED:
+        key = f'all_categories'
+        all_categories = cache.get(key)
+        if all_categories is None:
+            all_categories = Category.objects.all()
+            cache.set(key, all_categories)
+    else:
+        all_categories = Category.objects.all()
+    return all_categories
 
 
 class BlogCreateView(CreateView):

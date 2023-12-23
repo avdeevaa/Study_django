@@ -1,15 +1,15 @@
 {% load static %}
-{% load mediapath %}
-
 <!DOCTYPE HTML>
 <html>
 
 <head>
-  <title>simplestyle_6 - contact us</title>
+  <title>simplestyle_6 - examples</title>
   <meta charset="UTF-8">
   <meta name="description" content="website description" />
   <meta name="keywords" content="website keywords, website keywords" />
   <meta http-equiv="content-type" content="text/html; charset=windows-1252" />
+<!--  <link rel="stylesheet" type="text/css" href="{% static 'style/style.css' %}" />-->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <link rel="stylesheet" type="text/css" href="{% static 'style/style.css' %}" />
 </head>
 
@@ -19,7 +19,7 @@
       <div id="logo">
         <div id="logo_text">
           <!-- class="logo_colour", allows you to change the colour of the text -->
-          <h1><a href="{% url 'catalog:main_page' %}">simple<span class="logo_colour">style_6</span></a></h1>
+          <h1><a href="main_page.html">simple<span class="logo_colour">style_6</span></a></h1>
           <h2>Simple. Contemporary. Website Template.</h2>
         </div>
       </div>
@@ -27,10 +27,10 @@
         <ul id="menu">
           <!-- put class="selected" in the li tag for the selected page - to highlight which page you're on -->
           <li><a href="{% url 'catalog:main_page' %}">Домашняя страничка</a></li>
-          <li><a href="{% url 'catalog:items_page' %}">Товары</a></li>
+          <li class="selected"><a href="{% url 'catalog:items_page' %}">Товары</a></li>
           <li><a href="{% url 'catalog:read_blog' %}">Блог</a></li>
           <li><a href="{% url 'catalog:all_categories' %}">Категории</a></li>
-          <li class="selected"><a href="{% url 'catalog:contact_page' %}">Контакты</a></li>
+          <li><a href="{% url 'catalog:contact_page' %}">Контакты</a></li>
           {% if user.is_authenticated %}
             <li class="selected"><a href="{% url 'users:logout' %}">Выйти</a></li>
             <li class="selected"><a href="{% url 'users:profile' %}">Профиль</a></li>
@@ -41,27 +41,29 @@
       </div>
     </div>
     <div id="content_header"></div>
+
     <div id="site_content">
+          <div id="content">
+            <h1>Все категории товаров</h1>
+            <h2>CRUD не делала, только просмотр</h2>
+            <div class="container">
+              <div class="row">
+                {% for category in object_list %}
+                  <div class="col-md-5">
+                    <div class="card">
+                      <div class="card-body">
+                        <h3 class="card-title">{{ category.name }}</h3>
+                        <h4>Homework 23.2</h4>
+                        <h5>Создано: &copy; {% now 'Y' %}</h5>
+                        <p class="card-text">{{ category.description }}</p>
+                      </div>
+                    </div>
+                  </div>
+                {% endfor %}
+              </div>
+            </div>
 
-      <div id="content">
-        <!-- insert the page content here -->
-        <h1>Свяжитесь с нами</h1>
-        <p>Напишите ваши данные:</p>
-        <form action="" method="post">
-          <div class="form_settings">
-            {% csrf_token %}
-            <p><span>Ваше имя:</span><input class="contact" type="text" name="name" value="" /></p>
-            <p><span>Ваш телефон:</span><input class="contact" type="text" name="зрщту" value="" /></p>
-            <p><span>Ваше сообщение:</span><textarea class="contact textarea" rows="8" cols="50" name="message"></textarea></p>
-            <p style="padding-top: 15px"><span>&nbsp;</span><input class="submit" type="submit" name="contact_submitted" value="подтвердить" /></p>
           </div>
-        </form>
-          <p>
-          <br /><br />Мы с Вами свяжемся в ближайшее время
-          <img src="{% mediapath 'heart.png' %}" alt="heart" />
-
-<!--          <img src="{% static 'style/heart.png' %}" alt="heart" />-->
-          </p>
       </div>
     </div>
     <div id="content_footer"></div>
