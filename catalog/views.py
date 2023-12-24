@@ -6,8 +6,11 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView, D
 from catalog.forms import ProductForm
 from django.core.exceptions import PermissionDenied
 
-from config.settings import CACHE_ENABLED
-from django.core.cache import cache
+from catalog.service import CategoryService
+
+
+# from config.settings import CACHE_ENABLED
+# from django.core.cache import cache
 
 
 class ProductListView(ListView):
@@ -87,17 +90,20 @@ class CategoryListView(ListView):
     model = Category
     template_name = 'design/category_list.html'
 
+    def get_queryset(self):
+        return CategoryService.cache_example()
 
-def cache_example():
-    if CACHE_ENABLED:
-        key = f'all_categories'
-        all_categories = cache.get(key)
-        if all_categories is None:
-            all_categories = Category.objects.all()
-            cache.set(key, all_categories)
-    else:
-        all_categories = Category.objects.all()
-    return all_categories
+
+# def cache_example():
+#     if CACHE_ENABLED:
+#         key = f'all_categories'
+#         all_categories = cache.get(key)
+#         if all_categories is None:
+#             all_categories = Category.objects.all()
+#             cache.set(key, all_categories)
+#     else:
+#         all_categories = Category.objects.all()
+#     return all_categories
 
 
 class BlogCreateView(CreateView):
