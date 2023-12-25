@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, reverse
 from django.views.decorators.cache import cache_page
 
@@ -9,20 +10,17 @@ from django.core.exceptions import PermissionDenied
 from catalog.service import CategoryService
 
 
-# from config.settings import CACHE_ENABLED
-# from django.core.cache import cache
-
-
 class ProductListView(ListView):
     """ replaces main_page"""
     model = Product
     template_name = 'design/main_page.html'
 
 
-class ProductCreateView(CreateView):
+class ProductCreateView(LoginRequiredMixin, CreateView):
     model = Product
     form_class = ProductForm
     template_name = 'design/product_form.html'
+    login_url = '/users/'  # перенаправляем незарегистрированного пользователя на вход
 
     def get_success_url(self):
         return reverse('catalog:items_page')
@@ -35,10 +33,11 @@ class ProductCreateView(CreateView):
         return super().form_valid(form)
 
 
-class ProductUpdateView(UpdateView):
+class ProductUpdateView(LoginRequiredMixin, UpdateView):
     model = Product
     form_class = ProductForm
     template_name = 'design/product_form.html'
+    login_url = '/users/'  # перенаправляем незарегистрированного пользователя на вход
 
     def get_success_url(self):
         return reverse('catalog:items_page')
@@ -53,9 +52,10 @@ class ProductUpdateView(UpdateView):
         return super().form_valid(form)
 
 
-class ProductDeleteView(DeleteView):
+class ProductDeleteView(LoginRequiredMixin, DeleteView):
     model = Product
     template_name = 'design/product_confirm_delete.html'
+    login_url = '/users/'  # перенаправляем незарегистрированного пользователя на вход
 
     def get_success_url(self):
         return reverse('catalog:items_page')
